@@ -123,22 +123,22 @@ function scorerPrompt(userInputWord) {
 
 
 
-function transform() {};
+function transform(oldPointStructure) {};
 
 let newPointStructure = {
-   a : [1] ,
-   b : [3] ,
-   c : [3] ,
+   a :[1] ,
+   b :[3] ,
+   c :[3] ,
    d :[2],
-   e:[1],
-   f:[4],
-   g:[2],
-   h:[4],
+   e :[1],
+   f :[4],
+   g :[2],
+   h :[4],
    i :[1],
    J :[8],
    k :[5],
    l :[1],
-   m:[3],
+   m :[3],
    n :[1],
    o :[1],
    p :[3],
