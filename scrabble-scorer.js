@@ -10,7 +10,7 @@ const oldPointStructure = {
   5: ['K'],
   8: ['J', 'X'],
   10: ['Q', 'Z'],
-  0: " "
+  //0: " "
 };
 
 const simplePointStructure = {
@@ -49,7 +49,7 @@ let newPointStructure = {
    x : 8,
    y : 4,
    z : 10,
-   " " : 0
+   //" " : 0
 };
    //testing newpointstructure..
 
@@ -83,6 +83,7 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble!");
    let userWord = input.question("Enter a word to scrabble: ");
+
    return userWord;
 };
 
@@ -138,8 +139,8 @@ function scrabbleScorer(word){
       let tempValue = Number(newPointStructure[word[i]]);
       letterPoints += `Points for '${word[i]}': ${tempValue}\n`;
       score=score+tempValue;
-      console.log("SCORE -_----"+letterPoints);
-      console.log("SCORE -_----"+score);
+      //console.log("SCORE -_----"+letterPoints);
+      //console.log("SCORE -_----"+score);
    }
    //console.log(letterPoints);
    console.log(`Score for '${word}':`, score);
@@ -189,8 +190,8 @@ function transform(oldPointStructure) {
          for(let i=0;i<pointValueArray.length;i++){   
             let newKey = oldPointStructure[pointValue][i].toLowerCase();
             newPointStructure[newKey] = Number(pointValue);
-            console.log("Key ------"+newPointStructure[newKey]);
-            console.log("Value ------"+Number(pointValue));
+            //console.log("Key --"+newPointStructure[newKey]);
+            //console.log("Value --"+Number(pointValue));
          }
       }
       return newPointStructure;
