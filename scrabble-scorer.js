@@ -194,7 +194,6 @@ function scorerPrompt(userInputWord) {
    console.log("0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter: 0, 1, or 2\n");
    let userInput= input.question("Selected Scoring Algorithm : ");
  if( userInput == 0){
-   //console.log("algorithm name: ", scoringAlgorithms[0].name);
    scoringAlgorithms[0].scorerFunction(userInputWord);
    //simpleScorer(userInputWord);
 }  else if(userInput == 1){
