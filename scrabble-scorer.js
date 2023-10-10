@@ -13,14 +13,14 @@ const oldPointStructure = {
   //0: " "
 };
 
-const simplePointStructure = {
+/*const simplePointStructure = {
    1: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V','W', 'X', 'Y', 'Z' ]
-};
+};*/
 
-const vowelConsonantsPoint = {
+/*const vowelConsonantsPoint = {
    1: ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L','M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z' ],
    3: ['A', 'E', 'I', 'O' , 'U']
-};
+};*/
 
 let newPointStructure = { 
    a : 1,
@@ -62,9 +62,7 @@ function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let letterPoints = "";
    let score=0;
- 
 	for (let i = 0; i < word.length; i++) {
- 
 	  for (const pointValue in oldPointStructure) {
        if (oldPointStructure[pointValue].includes(word[i])) {
 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
@@ -83,13 +81,12 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble!");
    let userWord = input.question("Enter a word to scrabble: ");
-
    return userWord;
 };
 
 
 //let simpleScorer;
-function simpleScorer(word) {
+/*function simpleScorer(word) {
    word = word.toUpperCase();
    let letterPoints = "";
    let score=0;
@@ -104,11 +101,20 @@ function simpleScorer(word) {
     }
     console.log(`Score for '${word}' : `, score);
     return Number(score);
-  };
+  };*/
 
+  function simpleScorer(word){
+   word = word.toLowerCase(word);
+   let score = 0
+   for(let i=0;i<word.length;i++){
+      score=score+1;
+   }
+   console.log(`Score for '${word}' : `, score);
+   return Number(score);
+  }
 
 //let vowelBonusScorer;
-function vowelBonusScorer(word) {
+/*function vowelBonusScorer(word) {
    word = word.toUpperCase();
    let letterPoints = "";
    let score=0;
@@ -116,15 +122,30 @@ function vowelBonusScorer(word) {
      for (const pointValue in vowelConsonantsPoint) {
        if (vowelConsonantsPoint[pointValue].includes(word[i])) {
          letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+         //console.log(letterPoints);
          score=score+Number(pointValue);
+         //console.log(score);
        } 
      }
    }
    //console.log(letterPoints);
    console.log(`Score for '${word}':`, score);
    return Number(score);
- };
+ };*/
 
+function vowelBonusScorer(word){
+   let score = 0;
+   let vowels = ["a","e","i","o","u"];
+   word = word.toLowerCase();
+   for (let i=0;i < word.length;i++){
+       if (vowels.includes(word[i])){
+         score += 3
+       }else 
+         score += 1
+       }
+      console.log(`Score for '${word}':`, score);
+     return Number(score);
+      }
 
 
 //let scrabbleScorer;
@@ -139,7 +160,7 @@ function scrabbleScorer(word){
       let tempValue = Number(newPointStructure[word[i]]);
       letterPoints += `Points for '${word[i]}': ${tempValue}\n`;
       score=score+tempValue;
-      //console.log("SCORE -_----"+letterPoints);
+      //console.log(letterPoints);
       //console.log("SCORE -_----"+score);
    }
    //console.log(letterPoints);
@@ -166,18 +187,22 @@ let vowelObject={
   };
 
   
-  const scoringAlgorithms = [ simpleObject,vowelObject , scrabbleObject];
+  const scoringAlgorithms = [ simpleObject, vowelObject , scrabbleObject];
 
 function scorerPrompt(userInputWord) {
    console.log("Which scoring algorithm would you like to use? \n ");
    console.log("0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter: 0, 1, or 2\n");
    let userInput= input.question("Selected Scoring Algorithm : ");
  if( userInput == 0){
-   simpleScorer(userInputWord);
+   //console.log("algorithm name: ", scoringAlgorithms[0].name);
+   scoringAlgorithms[0].scorerFunction(userInputWord);
+   //simpleScorer(userInputWord);
 }  else if(userInput == 1){
-   vowelBonusScorer(userInputWord);
+   scoringAlgorithms[1].scorerFunction(userInputWord);
+   //vowelBonusScorer(userInputWord);
    }else if(userInput == 2){
-   scrabbleScorer(userInputWord);
+   scoringAlgorithms[2].scorerFunction(userInputWord);
+   //scrabbleScorer(userInputWord);
    }else{
       console.log("invalid input");
    }
