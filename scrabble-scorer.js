@@ -104,6 +104,7 @@ function initialPrompt() {
   };*/
 
   function simpleScorer(word){
+   console.log("input word "+word);
    word = word.toLowerCase(word);
    let score = 0
    for(let i=0;i<word.length;i++){
@@ -169,43 +170,54 @@ function scrabbleScorer(word){
 };
 
 let vowelObject={
-   name : 'vowel Scorer',
-   description : "Each letter is Vowels are 3 pts, consonants are 1 pt.",
+   name : 'Bonus Vowels',
+   description : "Vowels are 3 pts, consonants are 1 pt.letter is Vowels are 3 pts, consonants are 1 pt.",
    scorerFunction : vowelBonusScorer
   };
 
   let scrabbleObject={
-   name : 'Scrabble Scorer',
+   name : 'Scrabble',
    description : "The traditional scoring algorithm.",
    scorerFunction : scrabbleScorer
   };
 
   let simpleObject={
-   name : 'Scrabble Scorer',
-   description : "The traditional scoring algorithm.",
+   name : 'Simple Score',
+   description : "Each letter is worth 1 point.",
    scorerFunction : simpleScorer
   };
 
   
-  const scoringAlgorithms = [ simpleObject, vowelObject , scrabbleObject];
+ const scoringAlgorithms = [ simpleObject, vowelObject , scrabbleObject];
 
-function scorerPrompt(userInputWord) {
+function scorerPrompt() {
    console.log("Which scoring algorithm would you like to use? \n ");
    console.log("0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter: 0, 1, or 2\n");
    let userInput= input.question("Selected Scoring Algorithm : ");
- if( userInput == 0){
-   scoringAlgorithms[0].scorerFunction(userInputWord);
+   
+   while(userInput < 0 || userInput > 2 || isNaN(userInput)){
+      userInput = input.question("select Algorithm correctly:");
+   }
+      return scoringAlgorithms[userInput];
+   }
+
+ /*if(userInput == 0){
+   //scoringAlgorithms[0].scorerFunction(userInputWord);
+   return scoringAlgorithms[0];
+   //.scorerFunction(userInputWord);
    //simpleScorer(userInputWord);
-}  else if(userInput == 1){
-   scoringAlgorithms[1].scorerFunction(userInputWord);
+  } else if(userInput == 1){
+   return scoringAlgorithms[1];
+   //.scorerFunction(userInputWord);
    //vowelBonusScorer(userInputWord);
    }else if(userInput == 2){
-   scoringAlgorithms[2].scorerFunction(userInputWord);
+   return scoringAlgorithms[2];
+   //.scorerFunction(userInputWord);
    //scrabbleScorer(userInputWord);
    }else{
       console.log("invalid input");
    }
-};
+};*/
 
 function transform(oldPointStructure) {
    let newPointStructure = {};
@@ -226,8 +238,9 @@ runProgram();
 function runProgram() {
    let userInputWord = initialPrompt();
    //oldScrabbleScorer(userInputWord);
-   scorerPrompt(userInputWord);
-   
+   //scorerPrompt(userInputWord);
+   let obj = scorerPrompt();
+  obj.scorerFunction(userInputWord);
 }
 
 // Don't write any code below this line //
