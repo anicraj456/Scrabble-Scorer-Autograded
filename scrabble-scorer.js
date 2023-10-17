@@ -104,7 +104,7 @@ function initialPrompt() {
   };*/
 
   function simpleScorer(word){
-   console.log("input word "+word);
+   //console.log("input word "+word);
    word = word.toLowerCase(word);
    let score = 0
    for(let i=0;i<word.length;i++){
@@ -196,7 +196,7 @@ function scorerPrompt() {
    let userInput= input.question("Selected Scoring Algorithm : ");
    
    while(userInput < 0 || userInput > 2 || isNaN(userInput)){
-      userInput = input.question("select Algorithm correctly:");
+      userInput = input.question("Select Algorithm correctly:");
    }
       return scoringAlgorithms[userInput];
    }
@@ -238,7 +238,7 @@ runProgram();
 function runProgram() {
    let userInputWord = initialPrompt();
    //oldScrabbleScorer(userInputWord);
-   //scorerPrompt(userInputWord);
+   //scorerPrompt(userInputWord);   
    let obj = scorerPrompt();
   obj.scorerFunction(userInputWord);
 }
